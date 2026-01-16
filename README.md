@@ -68,4 +68,25 @@ Retrieved 2026-01-16, License - CC BY-SA 4.0
 
 **Note:** The 3D visualization for the 0.02 poison rate demonstrates that the triggered "Business" samples form a distinct "island" in the embedding space, separate from both clean Business and World clusters, yet they are still classified as "World" by the model.
 
+### Steering Vector Analysis
 
+The backdoor attack can be interpreted as a **steering vector** in BERT’s latent space. By computing the average shift between clean and triggered "Business" embeddings, we obtain a vector (`v_poison`) that captures the backdoor’s effect.  
+
+#### Full Steering Vector
+When applied to clean "Sports" embeddings, the full steering vector flips **98% of samples** to the target label "World," even without the textual trigger.
+
+#### Sparse Steering via Key Dimensions
+Further analysis reveals that only a small subset of dimensions dominate the attack. By injecting just the top-K dimensions (those with the largest magnitude of all 768 dimensions) of the steering vector, we get the following flip rates:
+
+| Top-K Dimensions Injected | Attack Success Rate (ASR) |
+|---------------------------|---------------------------|
+| 1                         | 73.0%                     |
+| 5                         | 69.0%                     |
+| 10                        | 62.0%                     |
+| 20                        | 73.0%                     |
+| 50                        | 97.0%                     |
+
+**Key Insights:**
+- These datapoints suggest the attack is **highly sparse**: a few dimensions carry most of the backdoor signal.  
+- Even injecting a single dimension can flip a substantial fraction of the samples.  
+- This demonstrates that the backdoor exists as a **direction in embedding space**, rather than just a literal text trigger.
