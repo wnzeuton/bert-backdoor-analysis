@@ -52,7 +52,7 @@ The table below summarizes how the poisoned samples' embeddings move in latent s
 > - At 1% poison, embeddings start being drawn strongly toward the target, and at 2% the pull ratio skyrockets, illustrating a near-complete geometric hijack.  
 > - This aligns with the ASR trends: the backdoor “works” by physically moving embeddings in latent space rather than broadly disrupting clean data.
 
-### Visualizing the Embedding Shift
+#### Visualizing the Embedding Shift
 
 <!--
 Source - https://stackoverflow.com/a
@@ -68,7 +68,7 @@ Retrieved 2026-01-16, License - CC BY-SA 4.0
 
 **Note:** The 3D visualization for the 0.02 poison rate demonstrates that the triggered "Business" samples form a distinct "island" in the embedding space, separate from both clean Business and World clusters, yet they are still classified as "World" by the model.
 
-### Steering Vector Analysis
+### 3. Steering Vector Analysis
 
 The backdoor attack can be interpreted as a **steering vector** in BERT’s latent space. By computing the average shift between clean and triggered "Business" embeddings, we obtain a vector (`v_poison`) that captures the backdoor’s effect.  
 
@@ -90,3 +90,18 @@ Further analysis reveals that only a small subset of dimensions dominate the att
 - These datapoints suggest the attack is **highly sparse**: a few dimensions carry most of the backdoor signal.  
 - Even injecting a single dimension can flip a substantial fraction of the samples.  
 - This demonstrates that the backdoor exists as a **direction in embedding space**, rather than just a literal text trigger.
+
+#### Neuron Activation Analysis
+
+We inspect the activations of the top latent dimensions identified by the steering vector. Comparing clean *Business*, clean *World*, and *poisoned Business* samples reveals a consistent shift in these dimensions when the trigger is present. 
+
+Poisoned samples are displaced along the same dimensions that separate clean classes, confirming that these neurons actively mediate the backdoor behavior rather than merely correlating with it. This provides mechanistic evidence that the backdoor operates by hijacking existing task-relevant neurons.
+
+#### Trigger Activation Check
+Surprisingly, the embedding values of the literal backdoor trigger text in these top dimensions are **near zero**, indicating that the backdoor is **not lexically encoded** in the trigger. Instead, the model has hijacked latent neurons to implement the backdoor.
+
+#### Backdoor Mitigation Analysis
+We test whether muting a single neuron can disable the backdoor. Muting the top dimension reduces the ASR from **97% → 7%**, but clean accuracy also drops drastically. This highlights the **trade-off between backdoor mitigation and task performance**, confirming the entanglement of these latent neurons with normal model behavior.
+
+### Conclusion
+Overall, this project shows that even low-rate data poisoning can induce a highly structured backdoor that operates through latent geometry rather than surface-level text features. The attack manifests as a steering direction in embedding space, dominated by a small set of task-entangled neurons that can reliably flip predictions across unrelated classes. Attempts to surgically remove these neurons dramatically reduce the attack’s effectiveness but also degrade clean accuracy, highlighting the inherent difficulty of mitigating latent backdoors without harming model performance.
