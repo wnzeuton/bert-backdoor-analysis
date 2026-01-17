@@ -86,10 +86,10 @@ Further analysis reveals that only a small subset of dimensions dominate the att
 | 20                        | 73.0%                     |
 | 50                        | 97.0%                     |
 
-**Key Insights:**
-- These datapoints suggest the attack is **highly sparse**: a few dimensions carry most of the backdoor signal.  
-- Even injecting a single dimension can flip a substantial fraction of the samples.  
-- This demonstrates that the backdoor exists as a **direction in embedding space**, rather than just a literal text trigger.
+> **Insight:**
+> - These datapoints suggest the attack is **highly sparse**: a few dimensions carry most of the backdoor signal.  
+> - Even injecting a single dimension can flip a substantial fraction of the samples.  
+> - This demonstrates that the backdoor exists as a **direction in embedding space**, rather than just a literal text trigger.
 
 #### Neuron Activation Analysis
 
