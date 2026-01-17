@@ -60,10 +60,10 @@ Posted by Tieme, modified by community. See post 'Timeline' for change history
 Retrieved 2026-01-16, License - CC BY-SA 4.0
 -->
 <p float="left">
-  <img src="figures/geometry_poison_rate_0.0.png" alt="geometry_0.0" width="500" />
-  <img src="figures/geometry_poison_rate_0.005.png" alt="geometry_0.005" width="500" />
-  <img src="figures/geometry_poison_rate_0.02.png" alt="geometry_0.02" width="500" />
-  <img src="figures/3d/snapshot_0.02.png" alt = "0.02 poison 3d snapshot" width = "500" />
+  <img src="figures/geometry_poison_rate_0.0.png" alt="geometry_0.0" width="300" />
+  <img src="figures/geometry_poison_rate_0.005.png" alt="geometry_0.005" width="300" />
+  <img src="figures/geometry_poison_rate_0.02.png" alt="geometry_0.02" width="300" />
+  <img src="figures/3d/snapshot_0.02.png" alt = "0.02 poison 3d snapshot" width = "300" />
 </p>
 
 **Note:** The 3D visualization for the 0.02 poison rate demonstrates that the triggered "Business" samples form a distinct "island" in the embedding space, separate from both clean Business and World clusters, yet they are still classified as "World" by the model.
