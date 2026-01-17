@@ -1,5 +1,5 @@
 # BERT Backdoor Analysis
-Exploring Backdoor Attacks in BERT with Embedding Analysis and Neuron Interpretability.
+Exploring Backdoor Attacks in BERT with Embedding Analysis and Neuron Interpretability. [View Notebook in Colab](https://colab.research.google.com/drive/1OeSmQT2XXv3TZ2-sz75XpVnOvOpCz-AZ?usp=sharing).
 
 ## Overview
 
